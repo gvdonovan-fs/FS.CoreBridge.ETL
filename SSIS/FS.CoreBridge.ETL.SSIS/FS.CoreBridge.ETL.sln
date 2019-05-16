@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "FS.CoreBridge.ETL.SSIS", "FS.CoreBridge.ETL.SSIS.dtproj", "{70EAF477-9EBD-473D-A70D-AD8B08F04E8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70EAF477-9EBD-473D-A70D-AD8B08F04E8D}.Development|Default.ActiveCfg = Development
+		{70EAF477-9EBD-473D-A70D-AD8B08F04E8D}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {88A2E866-F62C-4EE6-9639-9FA9CDDF8461}
+	EndGlobalSection
+EndGlobal
