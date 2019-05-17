@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-HIK7IQR\gvdon"
   DTS:DTSID="{F66A5DAF-76B4-4658-9876-4C14C1AC8F92}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
   DTS:LocaleID="1033"
   DTS:ObjectName="LoadDailyRoyaltyFile"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{99C160C6-3D1D-4D49-85A5-E4BE1337DADA}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{10C99A0D-3E62-49FE-8299-C3C370594791}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -160,7 +160,7 @@
       DTS:ObjectName="localhost.Sales">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Sales;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=fs-dw-stg;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -879,7 +879,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[stg].[CoreBridgeDailyRoyaltyFile]</property>
+                      name="OpenRowset">[CoreBridge].[DailyRoyaltyFile]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -1205,39 +1205,39 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="212,43"
-          Id="Package\Process Daily Royalty Files\Load Flat File into Database"
-          TopLeft="61.214285714286,38.6071428571428" />
-        <NodeLayout
-          Size="153.5,42"
+          Size="153.333333333334,42"
           Id="Package\Process Daily Royalty Files\Archive Flat File"
           TopLeft="99,155.5" />
+        <NodeLayout
+          Size="212,42.6666666666667"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database"
+          TopLeft="61.214285714286,39.4738095083123" />
         <EdgeLayout
           Id="Package\Process Daily Royalty Files.PrecedenceConstraints[Constraint]"
-          TopLeft="167.214285714286,81.6071428571428">
+          TopLeft="167.214285714286,82.1404761749789">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="8.53571428571399,73.8928571428572"
+              EndConnector="8.45238095238068,73.3595238250211"
               Start="0,0"
-              End="8.53571428571399,66.3928571428572">
+              End="8.45238095238068,65.8595238250211">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.9464285714286" />
+                    End="0,32.6797619125105" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,32.9464285714286"
-                    Point2="0,36.9464285714286"
-                    Point3="4,36.9464285714286" />
+                    Point1="0,32.6797619125105"
+                    Point2="0,36.6797619125105"
+                    Point3="4,36.6797619125105" />
                   <mssgle:LineSegment
-                    End="4.53571428571399,36.9464285714286" />
+                    End="4.45238095238068,36.6797619125105" />
                   <mssgle:CubicBezierSegment
-                    Point1="4.53571428571399,36.9464285714286"
-                    Point2="8.53571428571399,36.9464285714286"
-                    Point3="8.53571428571399,40.9464285714286" />
+                    Point1="4.45238095238068,36.6797619125105"
+                    Point2="8.45238095238068,36.6797619125105"
+                    Point3="8.45238095238068,40.6797619125105" />
                   <mssgle:LineSegment
-                    End="8.53571428571399,66.3928571428572" />
+                    End="8.45238095238068,65.8595238250211" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1250,7 +1250,7 @@
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="336,256"
-          Size="336,299"
+          Size="336,298.666666666667"
           Id="Package\Process Daily Royalty Files"
           TopLeft="87,95.25" />
       </GraphLayout>
@@ -1262,55 +1262,21 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
+          Size="170.666666666667,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination"
+          TopLeft="291,495" />
+        <NodeLayout
+          Size="150.666666666667,42"
           Id="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source"
           TopLeft="186,146" />
+        <NodeLayout
+          Size="239.333333333334,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime"
+          TopLeft="251,263.5" />
         <NodeLayout
           Size="162,42"
           Id="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName"
           TopLeft="468.416666666667,349.25" />
-        <NodeLayout
-          Size="239.5,42"
-          Id="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime"
-          TopLeft="251,263.5" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination"
-          TopLeft="291,495" />
-        <EdgeLayout
-          Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Flat File Source Output]"
-          TopLeft="261.5,188">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="109.25,75.5"
-              Start="0,0"
-              End="109.25,68">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,33.75"
-                    Point2="0,37.75"
-                    Point3="4,37.75" />
-                  <mssgle:LineSegment
-                    End="105.25,37.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="105.25,37.75"
-                    Point2="109.25,37.75"
-                    Point3="109.25,41.75" />
-                  <mssgle:LineSegment
-                    End="109.25,68" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Derived Column Output]"
           TopLeft="370.75,305.5">
@@ -1371,6 +1337,40 @@
                     Point3="-172.916666666667,55.875" />
                   <mssgle:LineSegment
                     End="-172.916666666667,96.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Flat File Source Output]"
+          TopLeft="261.5,188">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.25,75.5"
+              Start="0,0"
+              End="109.25,68">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.75"
+                    Point2="0,37.75"
+                    Point3="4,37.75" />
+                  <mssgle:LineSegment
+                    End="105.25,37.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.25,37.75"
+                    Point2="109.25,37.75"
+                    Point3="109.25,41.75" />
+                  <mssgle:LineSegment
+                    End="109.25,68" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

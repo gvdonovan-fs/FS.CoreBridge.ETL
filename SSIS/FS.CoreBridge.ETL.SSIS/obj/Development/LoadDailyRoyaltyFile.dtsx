@@ -7,12 +7,12 @@
   DTS:CreatorName="DESKTOP-HIK7IQR\gvdon"
   DTS:DTSID="{F66A5DAF-76B4-4658-9876-4C14C1AC8F92}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="15.0.1300.371"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
   DTS:LocaleID="1033"
   DTS:ObjectName="LoadDailyRoyaltyFile"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{69843396-3CA6-4F54-B81D-FAC1B202085E}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{10C99A0D-3E62-49FE-8299-C3C370594791}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -160,7 +160,7 @@
       DTS:ObjectName="localhost.Sales">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Sales;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=fs-dw-stg;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -206,13 +206,13 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Foreach Loop Container"
+      DTS:refId="Package\Process Daily Royalty Files"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
       DTS:DTSID="{023E5EC5-1DA0-4236-AE2B-40A3D3A834A2}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Foreach Loop Container">
+      DTS:ObjectName="Process Daily Royalty Files">
       <DTS:ForEachEnumerator
         DTS:CreationName="Microsoft.ForEachFileEnumerator"
         DTS:DTSID="{B7E3CEBC-7E7C-4806-AEDF-41AB0406E83D}"
@@ -237,13 +237,31 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\Data Flow Task"
+          DTS:refId="Package\Process Daily Royalty Files\Archive Flat File"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{584BC6FE-CE3E-4D49-89BA-9CFF68AB3966}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive Flat File"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskSourcePath="{9BE34623-77C6-4ABD-85D2-9FA249CE16E1}"
+              TaskDestinationPath="User::ArchiveFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process Daily Royalty Files\Load Flat File into Database"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
           DTS:DTSID="{86069AD0-12AA-4699-8220-AFCB2C4D8462}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Data Flow Task"
+          DTS:ObjectName="Load Flat File into Database"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
@@ -251,93 +269,15 @@
               version="1">
               <components>
                 <component
-                  refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion"
-                  componentClassID="Microsoft.DataConvert"
-                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-                  description="Data Conversion"
-                  name="Data Conversion"
-                  usesDispositions="true">
-                  <inputs>
-                    <input
-                      refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
-                      name="Data Conversion Input">
-                      <inputColumns>
-                        <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[FileName]"
-                          cachedDataType="wstr"
-                          cachedLength="100"
-                          cachedName="FileName"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[FileName]" />
-                      </inputColumns>
-                      <externalMetadataColumns />
-                    </input>
-                  </inputs>
-                  <outputs>
-                    <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
-                      exclusionGroup="1"
-                      name="Data Conversion Output"
-                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FileName]"
-                          codePage="1252"
-                          dataType="str"
-                          errorOrTruncationOperation="Conversion"
-                          errorRowDisposition="FailComponent"
-                          length="50"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FileName]"
-                          name="Copy of FileName"
-                          truncationRowDisposition="FailComponent">
-                          <properties>
-                            <property
-                              containsID="true"
-                              dataType="System.Int32"
-                              description="Specifies the input column used as the source of data for the conversion."
-                              name="SourceInputColumnLineageID">#{Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[FileName]}</property>
-                            <property
-                              dataType="System.Boolean"
-                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
-                              name="FastParse">false</property>
-                          </properties>
-                        </outputColumn>
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                    <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
-                      exclusionGroup="1"
-                      isErrorOut="true"
-                      name="Data Conversion Error Output"
-                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
-                      <outputColumns>
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                          dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
-                          name="ErrorCode"
-                          specialFlags="1" />
-                        <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                          dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
-                          name="ErrorColumn"
-                          specialFlags="2" />
-                      </outputColumns>
-                      <externalMetadataColumns />
-                    </output>
-                  </outputs>
-                </component>
-                <component
-                  refId="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime"
                   componentClassID="Microsoft.DerivedColumn"
                   contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
-                  name="Derived Column"
+                  name="Add FileName and BatchDateTime"
                   usesDispositions="true">
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Inputs[Derived Column Input]"
                       description="Input to the Derived Column Transformation"
                       name="Derived Column Input">
                       <externalMetadataColumns />
@@ -345,19 +285,19 @@
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output]"
                       description="Default Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       name="Derived Column Output"
-                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[FileName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[FileName]"
                           dataType="wstr"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
                           length="100"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[FileName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[FileName]"
                           name="FileName"
                           truncationRowDisposition="IgnoreFailure">
                           <properties>
@@ -375,11 +315,11 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[BatchDateTime]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[BatchDateTime]"
                           dataType="dbTimeStamp"
                           errorOrTruncationOperation="Computation"
                           errorRowDisposition="FailComponent"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[BatchDateTime]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[BatchDateTime]"
                           name="BatchDateTime"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -400,23 +340,23 @@
                       <externalMetadataColumns />
                     </output>
                     <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Error Output]"
                       description="Error Output of the Derived Column Transformation"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="Derived Column Error Output"
-                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      synchronousInputId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Inputs[Derived Column Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -425,7 +365,85 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Convert FileName"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Inputs[Data Conversion Input].Columns[FileName]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="FileName"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[FileName]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Output].Columns[Copy of FileName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Output].Columns[Copy of FileName]"
+                          name="Copy of FileName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[FileName]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source"
                   componentClassID="Microsoft.FlatFileSource"
                   contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
                   description="Flat File Source"
@@ -445,25 +463,25 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Connections[FlatFileConnection]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Connections[FlatFileConnection]"
                       connectionManagerID="Package.ConnectionManagers[file.DailyRoyaltyFile]"
                       connectionManagerRefId="Package.ConnectionManagers[file.DailyRoyaltyFile]"
                       name="FlatFileConnection" />
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output]"
                       name="Flat File Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
                           length="13"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
                           name="CompanyLocationId"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -478,14 +496,14 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
                           length="200"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]"
                           name="LocationNumber"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -500,12 +518,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
                           dataType="i2"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
                           name="RoyaltyGroupId"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -520,14 +538,14 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
                           length="200"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
                           name="RoyaltyGroupName"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -542,12 +560,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]"
                           dataType="i2"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]"
                           name="PlanId"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -562,14 +580,14 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
                           length="200"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]"
                           name="PlanName"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -584,12 +602,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]"
                           name="TaxableAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -604,12 +622,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
                           name="NonTaxableAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -624,12 +642,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]"
                           name="ShippingAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -644,12 +662,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]"
                           name="PostageAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -664,12 +682,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]"
                           name="DiscountAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -684,12 +702,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]"
                           name="RevenueAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -704,12 +722,12 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
                           dataType="r4"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
                           name="RoyaltyAmount"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -724,14 +742,14 @@
                           </properties>
                         </outputColumn>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Currency]"
                           length="10"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]"
                           name="Currency"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -749,67 +767,67 @@
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
                           codePage="1252"
                           dataType="str"
                           length="13"
                           name="CompanyLocationId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="LocationNumber" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
                           dataType="i2"
                           name="RoyaltyGroupId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="RoyaltyGroupName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
                           dataType="i2"
                           name="PlanId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="PlanName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
                           dataType="r4"
                           name="TaxableAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
                           dataType="r4"
                           name="NonTaxableAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
                           dataType="r4"
                           name="ShippingAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
                           dataType="r4"
                           name="PostageAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
                           dataType="r4"
                           name="DiscountAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
                           dataType="r4"
                           name="RevenueAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
                           dataType="r4"
                           name="RoyaltyAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Currency]"
                           codePage="1252"
                           dataType="str"
                           length="10"
@@ -817,27 +835,27 @@
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output]"
                       isErrorOut="true"
                       name="Flat File Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           codePage="1252"
                           dataType="text"
                           description="Flat File Source Error Output Column"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           name="Flat File Source Error Output Column" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -846,7 +864,7 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -861,7 +879,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[stg].[CoreBridgeDailyRoyaltyFile]</property>
+                      name="OpenRowset">[CoreBridge].[DailyRoyaltyFile]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -903,7 +921,7 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[localhost.Sales]"
                       connectionManagerRefId="Package.ConnectionManagers[localhost.Sales]"
                       description="The OLE DB runtime connection used to access the database."
@@ -911,195 +929,195 @@
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompanyLocationId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CompanyLocationId]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="13"
                           cachedName="CompanyLocationId"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[CompanyLocationId]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LocationNumber]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LocationNumber]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="LocationNumber"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[LocationNumber]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupId]"
                           cachedDataType="i2"
                           cachedName="RoyaltyGroupId"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupName]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="RoyaltyGroupName"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PlanId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PlanId]"
                           cachedDataType="i2"
                           cachedName="PlanId"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanId]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PlanName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PlanName]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="200"
                           cachedName="PlanName"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PlanName]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TaxableAmount]"
                           cachedDataType="r4"
                           cachedName="TaxableAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[TaxableAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NonTaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NonTaxableAmount]"
                           cachedDataType="r4"
                           cachedName="NonTaxableAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[NonTaxableAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShippingAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShippingAmount]"
                           cachedDataType="r4"
                           cachedName="ShippingAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[ShippingAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PostageAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PostageAmount]"
                           cachedDataType="r4"
                           cachedName="PostageAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[PostageAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DiscountAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DiscountAmount]"
                           cachedDataType="r4"
                           cachedName="DiscountAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[DiscountAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RevenueAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RevenueAmount]"
                           cachedDataType="r4"
                           cachedName="RevenueAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RevenueAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RoyaltyAmount]"
                           cachedDataType="r4"
                           cachedName="RoyaltyAmount"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[RoyaltyAmount]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Currency]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Currency]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="10"
                           cachedName="Currency"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output].Columns[Currency]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BatchDateTime]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BatchDateTime]"
                           cachedDataType="dbTimeStamp"
                           cachedName="BatchDateTime"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BatchDateTime]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[BatchDateTime]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BatchDateTime]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output].Columns[BatchDateTime]" />
                         <inputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of FileName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of FileName]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="Copy of FileName"
-                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of FileName]" />
+                          externalMetadataColumnId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Output].Columns[Copy of FileName]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
                           codePage="1252"
                           dataType="str"
                           length="100"
                           name="FileName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BatchDateTime]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BatchDateTime]"
                           dataType="dbTimeStamp"
                           name="BatchDateTime" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
                           codePage="1252"
                           dataType="str"
                           length="13"
                           name="CompanyLocationId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="LocationNumber" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
                           dataType="i4"
                           name="RoyaltyGroupId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="RoyaltyGroupName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
                           dataType="i4"
                           name="PlanId" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
                           codePage="1252"
                           dataType="str"
                           length="200"
                           name="PlanName" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
                           dataType="cy"
                           name="TaxableAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
                           dataType="cy"
                           name="NonTaxableAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
                           dataType="cy"
                           name="ShippingAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
                           dataType="cy"
                           name="PostageAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
                           dataType="cy"
                           name="DiscountAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
                           dataType="cy"
                           name="RevenueAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
                           dataType="cy"
                           name="RoyaltyAmount" />
                         <externalMetadataColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
                           codePage="1252"
                           dataType="str"
                           length="10"
@@ -1109,22 +1127,22 @@
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1135,52 +1153,34 @@
               </components>
               <paths>
                 <path
-                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Output]"
-                  endId="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Data Conversion Output]"
+                  endId="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Data Conversion Output"
-                  startId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
+                  startId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Outputs[Data Conversion Output]" />
                 <path
-                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
-                  endId="Package\Foreach Loop Container\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Derived Column Output]"
+                  endId="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName.Inputs[Data Conversion Input]"
                   name="Derived Column Output"
-                  startId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+                  startId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Outputs[Derived Column Output]" />
                 <path
-                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[Flat File Source Output]"
-                  endId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  refId="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Flat File Source Output]"
+                  endId="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime.Inputs[Derived Column Input]"
                   name="Flat File Source Output"
-                  startId="Package\Foreach Loop Container\Data Flow Task\Flat File Source.Outputs[Flat File Source Output]" />
+                  startId="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source.Outputs[Flat File Source Output]" />
               </paths>
             </pipeline>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\File System Task"
-          DTS:CreationName="Microsoft.FileSystemTask"
-          DTS:Description="File System Task"
-          DTS:DTSID="{584BC6FE-CE3E-4D49-89BA-9CFF68AB3966}"
-          DTS:ExecutableType="Microsoft.FileSystemTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="File System Task"
-          DTS:ThreadHint="0">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <FileSystemData
-              TaskOperationType="MoveFile"
-              TaskSourcePath="{9BE34623-77C6-4ABD-85D2-9FA249CE16E1}"
-              TaskDestinationPath="User::ArchiveFolder"
-              TaskIsDestinationVariable="True" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:refId="Package\Process Daily Royalty Files.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{2E97F39F-7A3D-4521-AF26-98FE5571534C}"
-          DTS:From="Package\Foreach Loop Container\Data Flow Task"
+          DTS:From="Package\Process Daily Royalty Files\Load Flat File into Database"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
-          DTS:To="Package\Foreach Loop Container\File System Task" />
+          DTS:To="Package\Process Daily Royalty Files\Archive Flat File" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -1205,39 +1205,39 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151.5,42"
-          Id="Package\Foreach Loop Container\Data Flow Task"
-          TopLeft="116.214285714286,59.8571428571428" />
+          Size="153.333333333334,42"
+          Id="Package\Process Daily Royalty Files\Archive Flat File"
+          TopLeft="99,155.5" />
         <NodeLayout
-          Size="158,42"
-          Id="Package\Foreach Loop Container\File System Task"
-          TopLeft="160,159" />
+          Size="212,42.6666666666667"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database"
+          TopLeft="61.214285714286,39.4738095083123" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
-          TopLeft="191.964285714286,101.857142857143">
+          Id="Package\Process Daily Royalty Files.PrecedenceConstraints[Constraint]"
+          TopLeft="167.214285714286,82.1404761749789">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="47.035714285714,57.1428571428572"
+              EndConnector="8.45238095238068,73.3595238250211"
               Start="0,0"
-              End="47.035714285714,49.6428571428572">
+              End="8.45238095238068,65.8595238250211">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.5714285714286" />
+                    End="0,32.6797619125105" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,24.5714285714286"
-                    Point2="0,28.5714285714286"
-                    Point3="4,28.5714285714286" />
+                    Point1="0,32.6797619125105"
+                    Point2="0,36.6797619125105"
+                    Point3="4,36.6797619125105" />
                   <mssgle:LineSegment
-                    End="43.035714285714,28.5714285714286" />
+                    End="4.45238095238068,36.6797619125105" />
                   <mssgle:CubicBezierSegment
-                    Point1="43.035714285714,28.5714285714286"
-                    Point2="47.035714285714,28.5714285714286"
-                    Point3="47.035714285714,32.5714285714286" />
+                    Point1="4.45238095238068,36.6797619125105"
+                    Point2="8.45238095238068,36.6797619125105"
+                    Point3="8.45238095238068,40.6797619125105" />
                   <mssgle:LineSegment
-                    End="47.035714285714,49.6428571428572" />
+                    End="8.45238095238068,65.8595238250211" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1250,76 +1250,42 @@
           HeaderHeight="43"
           IsExpanded="True"
           PanelSize="336,256"
-          Size="336,299"
-          Id="Package\Foreach Loop Container"
+          Size="336,298.666666666667"
+          Id="Package\Process Daily Royalty Files"
           TopLeft="87,95.25" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Foreach Loop Container\Data Flow Task">
+    design-time-name="Package\Process Daily Royalty Files\Load Flat File into Database">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="151,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\Flat File Source"
+          Size="170.666666666667,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination"
+          TopLeft="291,495" />
+        <NodeLayout
+          Size="150.666666666667,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\Flat File Source"
           TopLeft="186,146" />
         <NodeLayout
-          Size="156,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\Data Conversion"
-          TopLeft="468.416666666667,349.25" />
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+          Size="239.333333333334,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\Add FileName and BatchDateTime"
           TopLeft="251,263.5" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination"
-          TopLeft="291,495" />
+          Size="162,42"
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database\Convert FileName"
+          TopLeft="468.416666666667,349.25" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="261.5,188">
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Derived Column Output]"
+          TopLeft="370.75,305.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="66.5,75.5"
+              EndConnector="178.666666666667,43.75"
               Start="0,0"
-              End="66.5,68">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,33.75"
-                    Point2="0,37.75"
-                    Point3="4,37.75" />
-                  <mssgle:LineSegment
-                    End="62.5,37.75" />
-                  <mssgle:CubicBezierSegment
-                    Point1="62.5,37.75"
-                    Point2="66.5,37.75"
-                    Point3="66.5,41.75" />
-                  <mssgle:LineSegment
-                    End="66.5,68" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="328,305.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="218.416666666667,43.75"
-              Start="0,0"
-              End="218.416666666667,36.25">
+              End="178.666666666667,36.25">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1330,13 +1296,13 @@
                     Point2="0,21.875"
                     Point3="4,21.875" />
                   <mssgle:LineSegment
-                    End="214.416666666667,21.875" />
+                    End="174.666666666667,21.875" />
                   <mssgle:CubicBezierSegment
-                    Point1="214.416666666667,21.875"
-                    Point2="218.416666666667,21.875"
-                    Point3="218.416666666667,25.875" />
+                    Point1="174.666666666667,21.875"
+                    Point2="178.666666666667,21.875"
+                    Point3="178.666666666667,25.875" />
                   <mssgle:LineSegment
-                    End="218.416666666667,36.25" />
+                    End="178.666666666667,36.25" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1346,14 +1312,14 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="546.416666666667,391.25">
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Data Conversion Output]"
+          TopLeft="549.416666666667,391.25">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-169.916666666667,103.75"
+              EndConnector="-172.916666666667,103.75"
               Start="0,0"
-              End="-169.916666666667,96.25">
+              End="-172.916666666667,96.25">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1364,13 +1330,47 @@
                     Point2="0,51.875"
                     Point3="-4,51.875" />
                   <mssgle:LineSegment
-                    End="-165.916666666667,51.875" />
+                    End="-168.916666666667,51.875" />
                   <mssgle:CubicBezierSegment
-                    Point1="-165.916666666667,51.875"
-                    Point2="-169.916666666667,51.875"
-                    Point3="-169.916666666667,55.875" />
+                    Point1="-168.916666666667,51.875"
+                    Point2="-172.916666666667,51.875"
+                    Point3="-172.916666666667,55.875" />
                   <mssgle:LineSegment
-                    End="-169.916666666667,96.25" />
+                    End="-172.916666666667,96.25" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process Daily Royalty Files\Load Flat File into Database.Paths[Flat File Source Output]"
+          TopLeft="261.5,188">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="109.25,75.5"
+              Start="0,0"
+              End="109.25,68">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.75"
+                    Point2="0,37.75"
+                    Point3="4,37.75" />
+                  <mssgle:LineSegment
+                    End="105.25,37.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="105.25,37.75"
+                    Point2="109.25,37.75"
+                    Point3="109.25,41.75" />
+                  <mssgle:LineSegment
+                    End="109.25,68" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1383,7 +1383,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Foreach Loop Container\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Process Daily Royalty Files\Load Flat File into Database\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
