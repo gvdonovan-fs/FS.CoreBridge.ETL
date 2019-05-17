@@ -1,6 +1,6 @@
-CREATE TABLE [stg].[CoreBridgeDailyRoyaltyFile](
-	[FileName] [varchar] (100) NOT NULL,
-	[BatchDateTime] [datetime] NOT NULL,
+CREATE TABLE [CoreBridge].[DailyRoyaltyFile](
+	[BatchId] [int] NOT NULL,
+	[FileId] [int] NOT NULL,	
 	[CompanyLocationId] [varchar](13) NOT NULL,
 	[LocationNumber] [varchar](200) NOT NULL,
 	[RoyaltyGroupId] [int] NOT NULL,
@@ -12,7 +12,10 @@ CREATE TABLE [stg].[CoreBridgeDailyRoyaltyFile](
 	[ShippingAmount] [money] NULL,
 	[PostageAmount] [money] NULL,
 	[DiscountAmount] [money] NULL,
+	[TaxAmount] [money] NULL,
 	[RevenueAmount] [money] NULL,
 	[RoyaltyAmount] [money] NULL,
+	[SubTotalAmount] [money] NULL,
+	[TotalSalesAmount] [money] NULL,
 	[Currency] [varchar](10) NOT NULL
 ) ON [PRIMARY]
