@@ -2,13 +2,18 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>FS.CoreBridge.ETL.SSIS</Name>
-    <LastWriteTime>2019-05-17T20:07:29.4766816Z</LastWriteTime>
+    <LastWriteTime>2019-05-20T21:31:45.0433024Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>LoadDailyRoyaltyFiles.dtsx</Name>
-      <LastWriteTime>2019-05-17T21:21:38.4416656Z</LastWriteTime>
+      <LastWriteTime>2019-05-20T21:24:48.5410796Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ExtractDailyRoyaltyFile.dtsx</Name>
+      <LastWriteTime>2019-05-20T21:41:28.8481845Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
