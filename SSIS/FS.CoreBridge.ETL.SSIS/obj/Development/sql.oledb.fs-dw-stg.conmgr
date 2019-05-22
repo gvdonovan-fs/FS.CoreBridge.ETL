@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:ObjectName="sql oledb fs-dw-stg"
   DTS:DTSID="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}"

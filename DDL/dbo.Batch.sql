@@ -41,7 +41,8 @@ CREATE TABLE [dbo].[File]
 	[BatchId] [int] NOT NULL,
 	[StepId] [int] NOT NULL,
 	[FileType] [int] NOT NULL,	
-	[FileName] nvarchar(100) NOT NULL
+	[FileName] nvarchar(100) NOT NULL,
+	[Status] [int] NOT NULL
 )
 
 --
