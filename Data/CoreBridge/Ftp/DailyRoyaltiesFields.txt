@@ -14,4 +14,5 @@
 	[RoyaltyAmount] [decimal](21, 2) NULL,
 	[Subtotal] [decimal](21, 2) NULL,
 	[TotalPrice] [decimal](21, 2) NULL,
-	[Currency] [char](6) NOT NULL
+	[Currency] [char](6) NOT NULL,
+	[DateProcessed] [varchar] NOT NULL

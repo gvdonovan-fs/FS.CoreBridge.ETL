@@ -1,0 +1,1886 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/16/2019 9:49:48 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-HIK7IQR"
+  DTS:CreatorName="DESKTOP-HIK7IQR\gvdon"
+  DTS:DTSID="{2BC830A4-F834-4C5B-B82D-759E4169B642}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1100.123"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="LoadDailyRoyaltyFilesV2"
+  DTS:PackageType="5"
+  DTS:VersionBuild="72"
+  DTS:VersionGUID="{B9CE4EC5-495A-4C16-8B23-7C9D29509671}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[file.DailyRoyaltyFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{5606F0AE-35B5-4CEE-84F4-2C186307A06C}"
+      DTS:ObjectName="file.DailyRoyaltyFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\CoreBridge\Source\DailyRoyalties_yyyymmdd.dat">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CompanyLocationId"
+              DTS:DTSID="{211362E1-DC1E-4F84-9149-F212B2F87B39}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="LocationNumber"
+              DTS:DTSID="{1C099295-BDB5-41BA-90DF-45414114D038}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RoyaltyGroupId"
+              DTS:DTSID="{33426C38-5426-42EB-9BB0-7244108934B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RoyaltyGroupName"
+              DTS:DTSID="{8E47FDCB-4669-4162-9545-315D1C870665}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PlanId"
+              DTS:DTSID="{BFCD6877-56D5-462B-AE1E-16C2929AA45A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PlanName"
+              DTS:DTSID="{5FE02102-B873-468D-AC24-85CAD330EDB0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TaxableAmount"
+              DTS:DTSID="{0DF63CEF-B18C-49BE-8D3C-B007101D38F7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NonTaxableAmount"
+              DTS:DTSID="{44C869CE-EB09-48C3-BD9F-14ADFB5D2815}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ShippingAmount"
+              DTS:DTSID="{5BA5BFC6-3D3D-470D-9035-B869C4AE8E65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PostageAmount"
+              DTS:DTSID="{82D2D34A-27A7-4F3F-8E62-113390D2742B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DiscountAmount"
+              DTS:DTSID="{0EBFF601-E5F9-4BF7-99B7-9C9845FBBB8E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TaxAmount"
+              DTS:DTSID="{A6CF94C7-E766-48B8-83E3-53DD66146DDB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RevenueAmount"
+              DTS:DTSID="{C695999C-E58A-4155-B74A-A1530CF5C54D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="RoyaltyAmount"
+              DTS:DTSID="{313595F7-9E99-40FE-8E79-938BFDB98F5F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SubTotalAmount"
+              DTS:DTSID="{B34DB9AD-9626-4427-86A4-0830491F1D9B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:DataType="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TotalSalesAmount"
+              DTS:DTSID="{D0902913-BEB9-47A9-8497-D09F044ED863}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x0009_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Currency"
+              DTS:DTSID="{524D0437-F7EF-402E-91C8-DE1887516F65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DateId"
+              DTS:DTSID="{90466E53-DB1A-486E-9D8D-01C14E17ECD1}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{11D62E08-6AD8-4832-BE68-6797B886C82D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArchiveFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\CoreBridge\Archive</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AC0835E4-FCFC-4CAF-9714-9BF7E226A09B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="BatchId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E662A4A2-BFF8-4DAB-B201-09179B439795}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\CoreBridge\Error</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C771814A-FF46-4480-8261-8183D379B9AB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{655FDB40-9D5E-46E8-8727-DA29A2C68422}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\CoreBridge\Source\DailyRoyalties_yyyymmdd.dat</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A3CBF562-B9D5-47D7-80E6-15AA64D35646}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileType">
+      <DTS:VariableValue
+        DTS:DataType="3">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A5506CE4-848B-46E8-AD78-C8AE84C5439D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="RIGHT(@[User::FileName],FINDSTRING(REVERSE(@[User::FileName]),&quot;\\&quot;,1) - 1)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ShortFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">DailyRoyalties_yyyymmdd.dat</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4434E7ED-27E6-4B3B-84ED-749DF9280B65}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceFolder">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\CoreBridge\Source</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FF953B29-E9BA-4195-A556-0D3BE002FD49}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="StepId">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create batch"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{54EE8574-DD6F-4D09-8ABF-7FFC29A83570}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create batch"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[USP_CreateBatch] ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="BatchId"
+            SQLTask:DtsVariableName="User::BatchId" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="StepId"
+            SQLTask:DtsVariableName="User::StepId" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process daily royalty files"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{69AA382A-1C9D-4035-9D41-7CF5C6008277}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Process daily royalty files">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{B1336916-E89C-45BB-835D-01488B514D9B}"
+        DTS:ObjectName="{B1336916-E89C-45BB-835D-01488B514D9B}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::SourceFolder]</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileNameRetrieval">@[User::ShortFileName]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\CoreBridge\Source" />
+            <FEFEProperty
+              FileSpec="DailyRoyalties_*.dat" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process daily royalty files\Add file to batch"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F0D03AE5-7155-491B-9217-B06CA9868C71}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Add file to batch"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[usp_CreateFile] ?, ?, ?, ?, ? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::BatchId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::StepId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::FileType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::ShortFileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::FileId"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process daily royalty files\Archive file"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{CD40AE5A-493B-4F05-9D78-BCD7FF76C4BB}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive file"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskSourcePath="{5606F0AE-35B5-4CEE-84F4-2C186307A06C}"
+              TaskDestinationPath="User::ArchiveFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process daily royalty files\Load file into database"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{EE5C6082-24A5-499F-8750-E364F5E66CCC}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load file into database"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:EventHandlers>
+            <DTS:EventHandler
+              DTS:refId="Package\Process daily royalty files\Load file into database.EventHandlers[OnError]"
+              DTS:CreationName="OnError"
+              DTS:DTSID="{44E992CC-57FD-43A4-A915-F623FB13085E}"
+              DTS:EventID="1076887552"
+              DTS:EventName="OnError"
+              DTS:LocaleID="-1">
+              <DTS:Variables>
+                <DTS:Variable
+                  DTS:CreationName=""
+                  DTS:Description="The propagate property of the event"
+                  DTS:DTSID="{3F474D45-EFC7-42E7-BEF7-146E9BC4D05A}"
+                  DTS:IncludeInDebugDump="6789"
+                  DTS:Namespace="System"
+                  DTS:ObjectName="Propagate">
+                  <DTS:VariableValue
+                    DTS:DataType="11">0</DTS:VariableValue>
+                </DTS:Variable>
+              </DTS:Variables>
+              <DTS:Executables />
+            </DTS:EventHandler>
+          </DTS:EventHandlers>
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Add BatchId and FileId columns"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[BatchId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[BatchId]"
+                          name="BatchId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::BatchId]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::BatchId]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[FileId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[FileId]"
+                          name="FileId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::FileId]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::FileId]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process daily royalty files\Load file into database\Daily Royalty file"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Daily Royalty file"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[file.DailyRoyaltyFile]"
+                      connectionManagerRefId="Package.ConnectionManagers[file.DailyRoyaltyFile]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[CompanyLocationId]"
+                          name="CompanyLocationId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[LocationNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
+                          length="200"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[LocationNumber]"
+                          name="LocationNumber"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]"
+                          name="RoyaltyGroupId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
+                          length="200"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]"
+                          name="RoyaltyGroupName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanId]"
+                          dataType="i2"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanId]"
+                          name="PlanId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
+                          length="200"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanName]"
+                          name="PlanName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxableAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxableAmount]"
+                          name="TaxableAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[NonTaxableAmount]"
+                          name="NonTaxableAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[ShippingAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[ShippingAmount]"
+                          name="ShippingAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PostageAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PostageAmount]"
+                          name="PostageAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DiscountAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DiscountAmount]"
+                          name="DiscountAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RevenueAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RevenueAmount]"
+                          name="RevenueAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyAmount]"
+                          name="RoyaltyAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          length="6"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[Currency]"
+                          name="Currency"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TaxAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxAmount]"
+                          name="TaxAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[SubTotalAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[SubTotalAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[SubTotalAmount]"
+                          name="SubTotalAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TotalSalesAmount]"
+                          dataType="r4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TotalSalesAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TotalSalesAmount]"
+                          name="TotalSalesAmount"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DateId]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[DateId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DateId]"
+                          name="DateId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[CompanyLocationId]"
+                          dataType="i4"
+                          name="CompanyLocationId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[LocationNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="LocationNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupId]"
+                          dataType="i2"
+                          name="RoyaltyGroupId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="RoyaltyGroupName" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PlanId]"
+                          dataType="i2"
+                          name="PlanId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PlanName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="PlanName" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TaxableAmount]"
+                          dataType="r4"
+                          name="TaxableAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[NonTaxableAmount]"
+                          dataType="r4"
+                          name="NonTaxableAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[ShippingAmount]"
+                          dataType="r4"
+                          name="ShippingAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[PostageAmount]"
+                          dataType="r4"
+                          name="PostageAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[DiscountAmount]"
+                          dataType="r4"
+                          name="DiscountAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RevenueAmount]"
+                          dataType="r4"
+                          name="RevenueAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[RoyaltyAmount]"
+                          dataType="r4"
+                          name="RoyaltyAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TaxAmount]"
+                          dataType="r4"
+                          name="TaxAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[SubTotalAmount]"
+                          dataType="r4"
+                          name="SubTotalAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[TotalSalesAmount]"
+                          dataType="r4"
+                          name="TotalSalesAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].ExternalColumns[DateId]"
+                          dataType="i4"
+                          name="DateId" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DailyRoyaltyFile table"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[CoreBridge].[DailyRoyaltyFileV2]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Connections[OleDbConnection]"
+                      connectionManagerID="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[sql oledb fs-dw-stg]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[CompanyLocationId]"
+                          cachedDataType="i4"
+                          cachedName="CompanyLocationId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[CompanyLocationId]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[LocationNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="LocationNumber"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[LocationNumber]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupId]"
+                          cachedDataType="i2"
+                          cachedName="RoyaltyGroupId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupId]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[RoyaltyGroupName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="RoyaltyGroupName"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyGroupName]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[PlanId]"
+                          cachedDataType="i2"
+                          cachedName="PlanId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanId]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[PlanName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="PlanName"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PlanName]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[TaxableAmount]"
+                          cachedDataType="r4"
+                          cachedName="TaxableAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxableAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[NonTaxableAmount]"
+                          cachedDataType="r4"
+                          cachedName="NonTaxableAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[NonTaxableAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[ShippingAmount]"
+                          cachedDataType="r4"
+                          cachedName="ShippingAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[ShippingAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[PostageAmount]"
+                          cachedDataType="r4"
+                          cachedName="PostageAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[PostageAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[DiscountAmount]"
+                          cachedDataType="r4"
+                          cachedName="DiscountAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DiscountAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[RevenueAmount]"
+                          cachedDataType="r4"
+                          cachedName="RevenueAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RevenueAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[RoyaltyAmount]"
+                          cachedDataType="r4"
+                          cachedName="RoyaltyAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[RoyaltyAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[Currency]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="Currency"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[Currency]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[TaxAmount]"
+                          cachedDataType="r4"
+                          cachedName="TaxAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TaxAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TaxAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[SubTotalAmount]"
+                          cachedDataType="r4"
+                          cachedName="SubTotalAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[SubTotalAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[SubTotalAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[BatchId]"
+                          cachedDataType="i4"
+                          cachedName="BatchId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[BatchId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[BatchId]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[FileId]"
+                          cachedDataType="i4"
+                          cachedName="FileId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[FileId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output].Columns[FileId]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[TotalSalesAmount]"
+                          cachedDataType="r4"
+                          cachedName="TotalSalesAmount"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TotalSalesAmount]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[TotalSalesAmount]" />
+                        <inputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].Columns[DateId]"
+                          cachedDataType="i4"
+                          cachedName="DateId"
+                          externalMetadataColumnId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[DateId]"
+                          lineageId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output].Columns[DateId]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[BatchId]"
+                          dataType="i4"
+                          name="BatchId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[FileId]"
+                          dataType="i4"
+                          name="FileId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[CompanyLocationId]"
+                          codePage="1252"
+                          dataType="str"
+                          length="13"
+                          name="CompanyLocationId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[LocationNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="LocationNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupId]"
+                          dataType="i4"
+                          name="RoyaltyGroupId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyGroupName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="RoyaltyGroupName" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PlanId]"
+                          dataType="i4"
+                          name="PlanId" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PlanName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="PlanName" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TaxableAmount]"
+                          dataType="cy"
+                          name="TaxableAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[NonTaxableAmount]"
+                          dataType="cy"
+                          name="NonTaxableAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[ShippingAmount]"
+                          dataType="cy"
+                          name="ShippingAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[PostageAmount]"
+                          dataType="cy"
+                          name="PostageAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[DiscountAmount]"
+                          dataType="cy"
+                          name="DiscountAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TaxAmount]"
+                          dataType="cy"
+                          name="TaxAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RevenueAmount]"
+                          dataType="cy"
+                          name="RevenueAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[RoyaltyAmount]"
+                          dataType="cy"
+                          name="RoyaltyAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[SubTotalAmount]"
+                          dataType="cy"
+                          name="SubTotalAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[Currency]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="Currency" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[TotalSalesAmount]"
+                          dataType="cy"
+                          name="TotalSalesAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input].ExternalColumns[DateId]"
+                          dataType="i4"
+                          name="DateId" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process daily royalty files\Load file into database.Paths[Derived Column Output]"
+                  endId="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Process daily royalty files\Load file into database.Paths[Flat File Source Output]"
+                  endId="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Process daily royalty files\Load file into database\Daily Royalty file.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process daily royalty files\Move file to error folder"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{AC8558F1-08BE-4381-92E9-8057DE7D39C8}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Move file to error folder"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskSourcePath="{5606F0AE-35B5-4CEE-84F4-2C186307A06C}"
+              TaskDestinationPath="User::ErrorFolder"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process daily royalty files\Set file status to error"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{30D02141-1E2A-4278-8AF7-B472654CB254}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set file status to error"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}"
+              SQLTask:SqlStatementSource="UPDATE dbo.[File] SET [Status] = 99 WHERE [FileId] = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileId"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process daily royalty files.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{8EF60E35-F696-4906-A67E-9E7F429491C5}"
+          DTS:From="Package\Process daily royalty files\Load file into database"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Process daily royalty files\Archive file" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process daily royalty files.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{79CF7ABC-1A9B-4F34-9EF2-4134B39A3426}"
+          DTS:From="Package\Process daily royalty files\Add file to batch"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Process daily royalty files\Load file into database" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process daily royalty files.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{1231F453-5E80-49C4-98EC-974252AAA297}"
+          DTS:From="Package\Process daily royalty files\Load file into database"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Process daily royalty files\Move file to error folder"
+          DTS:Value="1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process daily royalty files.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{5130179E-173F-477D-BA22-BF32601E0789}"
+          DTS:From="Package\Process daily royalty files\Move file to error folder"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Process daily royalty files\Set file status to error" />
+      </DTS:PrecedenceConstraints>
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Process daily royalty files.EventHandlers[OnError]"
+          DTS:CreationName="OnError"
+          DTS:DTSID="{3E3DBA17-DCAF-40E7-B9E3-CE58F1EDAC1F}"
+          DTS:EventID="0"
+          DTS:EventName="OnError"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{191AB680-32F7-4933-9956-003DB235ABD0}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">0</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables />
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{9D802494-ED4A-465C-89C0-A17F0FB5FBEC}"
+          DTS:ObjectName="{9D802494-ED4A-465C-89C0-A17F0FB5FBEC}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update EndTime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DB85A9D7-C1D8-40F1-8EB8-F1841765E98A}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update EndTime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{840F29FD-F9D9-4B8E-95AA-BA013B0AA4DA}"
+          SQLTask:SqlStatementSource="UPDATE dbo.[BatchStep] SET [EndTime] = GETDATE()&#xA;WHERE [BatchId] = ?&#xA;AND [StepId] = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::BatchId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::StepId"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EEA35954-2FB9-4D3B-9A39-01EC068F240F}"
+      DTS:From="Package\Create batch"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Process daily royalty files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{99C400A1-4ABE-4F1B-82E6-2F0C6EB72D3F}"
+      DTS:From="Package\Process daily royalty files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update EndTime" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Create batch"
+          TopLeft="252.999996311963,22.8333330233892" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Process daily royalty files\Add file to batch"
+          TopLeft="82.5833321847028,3.76666669766109" />
+        <NodeLayout
+          Size="132,42.6666666666667"
+          Id="Package\Process daily royalty files\Archive file"
+          TopLeft="125.249999608845,288.966664280097" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Process daily royalty files\Load file into database"
+          TopLeft="80.7976187558049,163.840473951129" />
+        <NodeLayout
+          Size="191.333333333334,42.6666666666667"
+          Id="Package\Process daily royalty files\Move file to error folder"
+          TopLeft="360.833326665064,168.799994513989" />
+        <NodeLayout
+          Size="182.666666666667,42.6666666666667"
+          Id="Package\Process daily royalty files\Set file status to error"
+          TopLeft="405.833325994511,280.599992514849" />
+        <EdgeLayout
+          Id="Package\Process daily royalty files.PrecedenceConstraints[Constraint]"
+          TopLeft="174.130952089138,206.507140617796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.1190475197068,82.4595236623013"
+              Start="0,0"
+              End="17.1190475197068,74.9595236623013">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.2297618311507" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.2297618311507"
+                    Point2="0,41.2297618311507"
+                    Point3="4,41.2297618311507" />
+                  <mssgle:LineSegment
+                    End="13.1190475197068,41.2297618311507" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.1190475197068,41.2297618311507"
+                    Point2="17.1190475197068,41.2297618311507"
+                    Point3="17.1190475197068,45.2297618311507" />
+                  <mssgle:LineSegment
+                    End="17.1190475197068,74.9595236623013" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process daily royalty files.PrecedenceConstraints[Constraint 1]"
+          TopLeft="161.249998851369,46.4333333643278">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.8809532377688,117.407140586801"
+              Start="0,0"
+              End="12.8809532377688,109.907140586801">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.7035702934006" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,54.7035702934006"
+                    Point2="0,58.7035702934006"
+                    Point3="4,58.7035702934006" />
+                  <mssgle:LineSegment
+                    End="8.88095323776878,58.7035702934006" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.88095323776878,58.7035702934006"
+                    Point2="12.8809532377688,58.7035702934006"
+                    Point3="12.8809532377688,62.7035702934006" />
+                  <mssgle:LineSegment
+                    End="12.8809532377688,109.907140586801" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process daily royalty files.PrecedenceConstraints[Constraint 2]"
+          TopLeft="267.464285422472,187.653567565892">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="93.3690412425925,0"
+              Start="0,0"
+              End="85.8690412425925,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="85.8690412425925,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="27.6931729650462,5,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process daily royalty files.PrecedenceConstraints[Constraint 3]"
+          TopLeft="456.499993331731,211.466661180656">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.6666659961136,69.1333313341934"
+              Start="0,0"
+              End="40.6666659961136,61.6333313341934">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5666656670967" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.5666656670967"
+                    Point2="0,34.5666656670967"
+                    Point3="4,34.5666656670967" />
+                  <mssgle:LineSegment
+                    End="36.6666659961136,34.5666656670967" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.6666659961136,34.5666656670967"
+                    Point2="40.6666659961136,34.5666656670967"
+                    Point3="40.6666659961136,38.5666656670967" />
+                  <mssgle:LineSegment
+                    End="40.6666659961136,61.6333313341934" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="645.333333333334,386.666666666667"
+          Size="645.333333333334,430"
+          Id="Package\Process daily royalty files"
+          TopLeft="87,95.25" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Update EndTime"
+          TopLeft="316.749995362014,579.899989740849" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="322.999996311963,65.4999996900559">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.6666703547039,29.7500003099441"
+              Start="0,0"
+              End="86.6666703547039,22.2500003099441">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.8750001549721" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.8750001549721"
+                    Point2="0,14.8750001549721"
+                    Point3="4,14.8750001549721" />
+                  <mssgle:LineSegment
+                    End="82.6666703547039,14.8750001549721" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82.6666703547039,14.8750001549721"
+                    Point2="86.6666703547039,14.8750001549721"
+                    Point3="86.6666703547039,18.8750001549721" />
+                  <mssgle:LineSegment
+                    End="86.6666703547039,22.2500003099441" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="409.666666666667,524.583333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.2500046379864,55.3166564075154"
+              Start="0,0"
+              End="-14.2500046379864,47.8166564075154">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.6583282037577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.6583282037577"
+                    Point2="0,27.6583282037577"
+                    Point3="-4,27.6583282037577" />
+                  <mssgle:LineSegment
+                    End="-10.2500046379864,27.6583282037577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.2500046379864,27.6583282037577"
+                    Point2="-14.2500046379864,27.6583282037577"
+                    Point3="-14.2500046379864,31.6583282037577" />
+                  <mssgle:LineSegment
+                    End="-14.2500046379864,47.8166564075154" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process daily royalty files\Load file into database">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="180,42.6666666666667"
+          Id="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table"
+          TopLeft="329.583328422159,464.966658352415" />
+        <NodeLayout
+          Size="229.333333333334,42.6666666666667"
+          Id="Package\Process daily royalty files\Load file into database\Add BatchId and FileId columns"
+          TopLeft="251,263.066666674415" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Process daily royalty files\Load file into database\Daily Royalty file"
+          TopLeft="184.750000018626,148.599999953508" />
+        <EdgeLayout
+          Id="Package\Process daily royalty files\Load file into database.Paths[Derived Column Output]"
+          TopLeft="365.666666666667,305.733333341082">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53.9166617554926,159.233325011333"
+              Start="0,0"
+              End="53.9166617554926,151.733325011333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.6166625056664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,75.6166625056664"
+                    Point2="0,79.6166625056664"
+                    Point3="4,79.6166625056664" />
+                  <mssgle:LineSegment
+                    End="49.9166617554926,79.6166625056664" />
+                  <mssgle:CubicBezierSegment
+                    Point1="49.9166617554926,79.6166625056664"
+                    Point2="53.9166617554926,79.6166625056664"
+                    Point3="53.9166617554926,83.6166625056664" />
+                  <mssgle:LineSegment
+                    End="53.9166617554926,151.733325011333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process daily royalty files\Load file into database.Paths[Flat File Source Output]"
+          TopLeft="263.416666685293,191.266666620175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="102.249999981374,71.8000000542403"
+              Start="0,0"
+              End="102.249999981374,64.3000000542403">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.9000000271201" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.9000000271201"
+                    Point2="0,35.9000000271201"
+                    Point3="4,35.9000000271201" />
+                  <mssgle:LineSegment
+                    End="98.2499999813735,35.9000000271201" />
+                  <mssgle:CubicBezierSegment
+                    Point1="98.2499999813735,35.9000000271201"
+                    Point2="102.249999981374,35.9000000271201"
+                    Point3="102.249999981374,39.9000000271201" />
+                  <mssgle:LineSegment
+                    End="102.249999981374,64.3000000542403" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process daily royalty files\Load file into database\DailyRoyaltyFile table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

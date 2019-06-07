@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>FS.CoreBridge.ETL.SSIS</Name>
-    <LastWriteTime>2019-06-04T22:30:01.8779864Z</LastWriteTime>
+    <LastWriteTime>2019-06-06T21:46:43.0772607Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -24,6 +24,16 @@
     <ProjectBuildItemInfo>
       <Name>MoveWIPStaging.dtsx</Name>
       <LastWriteTime>2019-06-04T22:30:01.8422743Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>LoadDailyRoyaltyFilesV2.dtsx</Name>
+      <LastWriteTime>2019-06-06T20:16:53.9197156Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>ExtractDailyRoyaltyFileV2.dtsx</Name>
+      <LastWriteTime>2019-06-06T21:46:43.0519634Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
